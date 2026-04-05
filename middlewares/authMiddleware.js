@@ -15,7 +15,7 @@ const authorize = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    if (err.name === "TokenExpiredError") {
+    if (error.name === "TokenExpiredError") {
       return next(new AppError("Token expired, please log in again", 401));
     }
     return next(new AppError("Invalid token", 401));

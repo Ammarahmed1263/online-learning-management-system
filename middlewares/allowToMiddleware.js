@@ -1,3 +1,5 @@
+import AppError from "../utils/appError.js";
+
 const allowTo = (...allowedRoles) => {
   return (req, res, next) => {
     if (!req.user || !allowedRoles.includes(req.user.role)) {

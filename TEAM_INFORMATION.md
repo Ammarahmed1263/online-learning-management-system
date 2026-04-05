@@ -97,10 +97,10 @@ Legend: ✅ = Completed, ⬜ = Not Completed, 🟨 = In Progress
 | Member 5 | Global express-rate-limit bonus | Member 5 | ⬜ | |
 | Member 5 | Swagger docs with swagger-ui-express bonus | Member 5 | ⬜ | |
 | Shared | Error handling middleware | Team | ✅ | Global notFound + errorHandler are wired in app startup. |
-| Shared | Authentication middleware | Team | 🟨 | Middleware exists, but needs bug fix in token error handling path. |
+| Shared | Authentication middleware | Team | ✅ | |
 | Shared | RESTful conventions applied | Team | ⬜ | |
 | Shared | MongoDB models and relationships complete | Team | 🟨 | Database connection and User model exist; course/lesson/enrollment relationships pending. |
-| Shared | Environment variables configured | Team | 🟨 | Env usage exists, but DB variable name should align with project spec. |
+| Shared | Environment variables configured | Team | ✅ | |
 | Shared | GitHub repository deliverable complete | Team | ⬜ | |
 | Shared | API documentation deliverable complete | Team | ⬜ | |
 
