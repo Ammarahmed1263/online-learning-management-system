@@ -72,11 +72,11 @@ Legend: ✅ = Completed, ⬜ = Not Completed, 🟨 = In Progress
 
 | Area | Objective | Owner | Status | Notes |
 |---|---|---|---|---|
-| Member 1 | User Register endpoint | Member 1 | ⬜ | |
-| Member 1 | User Login endpoint | Member 1 | ⬜ | |
-| Member 1 | Password hashing with bcryptjs | Member 1 | ✅ | Implemented in User schema pre-save hook. |
-| Member 1 | JWT generation and verification | Member 1 | 🟨 | Verification middleware exists; login/register token generation not implemented yet. |
-| Member 1 | Roles setup (Admin, User, Instructor, Student as needed) | Member 1 | 🟨 | Admin/User roles are implemented; Instructor/Student not added yet. |
+| Member 1 | User Register endpoint | Ali Alaa Eldin | ⬜ | |
+| Member 1 | User Login endpoint | Ali Alaa Eldin | ⬜ | |
+| Member 1 | Password hashing with bcryptjs | Ali Alaa Eldin | ✅ | Implemented in User schema pre-save hook. |
+| Member 1 | JWT generation and verification | Ali Alaa Eldin | 🟨 | Verification middleware exists; login/register token generation not implemented yet. |
+| Member 1 | Roles setup (Admin, User, Instructor, Student as needed) | Ali Alaa Eldin | 🟨 | Admin/User roles are implemented; Instructor/Student not added yet. |
 | Member 2 | Course CRUD | Member 2 | ⬜ | |
 | Member 2 | Category CRUD | Member 2 | ⬜ | |
 | Member 2 | Instructor-only course creation | Member 2 | ⬜ | |
