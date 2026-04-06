@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:3000
+@json = application/json
+
+### Register Student
+POST {{baseUrl}}/api/auth/register
+Content-Type: {{json}}
+
+{
+  "userName": "student one",
+  "email": "student2@example.com",
+  "password": "Pass12345",
+  "role": "student"
+}
+
+### Register Instructor
+POST {{baseUrl}}/api/auth/register
+Content-Type: {{json}}
+
+{
+  "userName": "instructor one",
+  "email": "instructor1@example.com",
+  "password": "Pass12345",
+  "role": "instructor"
+}
+
+### Login Student
+# Copy token from response and paste into @token below.
+POST {{baseUrl}}/api/auth/login
+Content-Type: {{json}}
+
+{
+  "email": "student2@example.com",
+  "password": "Pass12345"
+}
+
+###
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDM5NGFiNTM3YWMwMGFlNTI5MDU1MSIsInJvbGUiOiJzdHVkZW50IiwiZW1haWwiOiJzdHVkZW50MkBleGFtcGxlLmNvbSIsImlhdCI6MTc3NTQ3MzgzNSwiZXhwIjoxNzc2MDc4NjM1fQ.81DbdQQrrJlKV2W8FvqvIXOmzucRj6NO9i8JN88US4E
+
+### Get Current User (Protected)
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{token}}
