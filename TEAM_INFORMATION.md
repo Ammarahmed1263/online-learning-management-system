@@ -103,8 +103,8 @@ Legend: ✅ = Completed, ⬜ = Not Completed, 🟨 = In Progress
 | Member 5 | Only enrolled student can review                         | Ammar & Farida | ⬜     |                                                                                           |
 | Member 5 | 1-5 star validation and text review                      | Ammar & Farida | ⬜     |                                                                                           |
 | Member 5 | Admin get all users endpoint finalization                | Ammar & Farida | ⬜     |                                                                                           |
-| Member 5 | Global express-rate-limit bonus                          | Ammar & Farida | ⬜     |                                                                                           |
-| Member 5 | Swagger docs with swagger-ui-express bonus               | Ammar & Farida | ⬜     |                                                                                           |
+| Member 5 | Global express-rate-limit bonus                          | Ammar & Farida | ✅     |                                                                                           |
+| Member 5 | Swagger docs with swagger-ui-express bonus               | Ammar & Farida | 🟨     |   each member should add jsdoc for his endpoints                                                                                        |
 | Shared   | Error handling middleware                                | Team           | ✅     | Global notFound + errorHandler are wired in app startup.                                  |
 | Shared   | Authentication middleware                                | Team           | ✅     |                                                                                           |
 | Shared   | RESTful conventions applied                              | Team           | ⬜     |                                                                                           |

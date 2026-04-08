@@ -1,6 +1,5 @@
 import "dotenv/config";
 import express from "express";
-import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import cors from "cors";
 import notFound from "./utils/notFound.js";
@@ -11,6 +10,7 @@ import courseRouter from "./routes/courseRouters.js"
 import lessonRoutes from "./routes/lessonRoutes.js"
 import { generalLimiter, authLimiter } from "./config/rateLimiter.js";
 import { setupSwagger } from "./config/swagger.js";
+import morgan from "morgan";
 
 const app = express();
 
@@ -18,6 +18,10 @@ dotenv.config();
 
 if (process.env.NODE_ENV === "production") {
     app.set("trust proxy", 1); // Trust first proxy for rate limiting "production only"
+}
+
+if (process.env.NODE_ENV === "development") {
+    app.use(morgan("dev"));
 }
 
 app.use(cors());
