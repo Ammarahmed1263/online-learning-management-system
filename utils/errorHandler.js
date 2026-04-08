@@ -1,10 +1,8 @@
 import jsend from "./jsend.js";
-import handleValidationError from "./handleValidationError.js";
 
 const errorHandler = (err, req, res, next) => {
   let error = err;
 
-  if (err.validationErrors) error = handleValidationError(err);
   if (!error.isOperational) console.error(err);
 
   const statusCode = error.statusCode || 500;

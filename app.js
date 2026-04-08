@@ -11,6 +11,7 @@ import lessonRoutes from "./routes/lessonRoutes.js"
 import { generalLimiter, authLimiter } from "./config/rateLimiter.js";
 import { setupSwagger } from "./config/swagger.js";
 import morgan from "morgan";
+import dotenv from 'dotenv';
 
 const app = express();
 
@@ -35,9 +36,9 @@ app.use("/api/auth/register", authLimiter);
 app.use("/api/auth", authRoutes);
 app.use("/api/lessons",lessonRoutes)
 
-app.use("/category", categoryRouter)
+app.use("/api/categories", categoryRouter)
 
-app.use("/course", courseRouter)
+app.use("/api/courses", courseRouter)
 
 app.use(notFound);
 app.use(errorHandler);

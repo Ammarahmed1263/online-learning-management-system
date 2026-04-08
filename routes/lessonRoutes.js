@@ -47,7 +47,7 @@ router.put(
 
 router.delete(
   "/:id",
-  validate(updateLessonValidation),
+  validate(getLessonValidation),
   authorize,
   allowTo(userRoles.INSTRUCTOR),
   asyncWrapper(deleteLesson)
