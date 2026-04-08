@@ -91,10 +91,10 @@ Legend: ✅ = Completed, ⬜ = Not Completed, 🟨 = In Progress
 | Member 2 | Instructor-only course creation                          | Belal Hesham   | ⬜     |                                                                                           |
 | Member 2 | Instructor can edit/delete only own courses              | Belal Hesham   | ⬜     |                                                                                           |
 | Member 2 | Course search and filtering bonus                        | Belal Hesham   | ⬜     |                                                                                           |
-| Member 3 | Lesson or Module CRUD                                    | Ahmed Khaled   | ⬜     |                                                                                           |
-| Member 3 | Enforce lesson courseId relation                         | Ahmed Khaled   | ⬜     |                                                                                           |
-| Member 3 | Only course owner instructor can add lesson              | Ahmed Khaled   | ⬜     |                                                                                           |
-| Member 3 | Lesson pagination bonus                                  | Ahmed Khaled   | ⬜     |                                                                                           |
+| Member 3 | Lesson or Module CRUD                                    | Ahmed Khaled   | ✅     |                                                                                           |
+| Member 3 | Enforce lesson courseId relation                         | Ahmed Khaled   | ✅     |                                                                                           |
+| Member 3 | Only course owner instructor can add lesson              | Ahmed Khaled   | ✅     |                                                                                           |
+| Member 3 | Lesson pagination bonus                                  | Ahmed Khaled   | ✅     |                                                                                           |
 | Member 4 | Enrollment create/list/remove flow                       | Ammar & Farida | ⬜     |                                                                                           |
 | Member 4 | checkEnrollment middleware                               | Ammar & Farida | ⬜     |                                                                                           |
 | Member 4 | Protect lesson GET routes by enrollment                  | Ammar & Farida | ⬜     |                                                                                           |
@@ -102,16 +102,16 @@ Legend: ✅ = Completed, ⬜ = Not Completed, 🟨 = In Progress
 | Member 5 | Review model and CRUD                                    | Ammar & Farida | ⬜     |                                                                                           |
 | Member 5 | Only enrolled student can review                         | Ammar & Farida | ⬜     |                                                                                           |
 | Member 5 | 1-5 star validation and text review                      | Ammar & Farida | ⬜     |                                                                                           |
-| Member 5 | Admin get all users endpoint finalization                | Ammar & Farida | ⬜     |                                                                                           |
-| Member 5 | Global express-rate-limit bonus                          | Ammar & Farida | ✅     |                                                                                           |
-| Member 5 | Swagger docs with swagger-ui-express bonus               | Ammar & Farida | 🟨     |   each member should add jsdoc for his endpoints                                                                                        |
+| Member 5 | Admin get all users endpoint finalization                | Ammar & Farida | ✅     |                                                                                           |
+| Member 5 | Global express-rate-limit bonus                          | Amma  | ✅     |                                                                                           |
+| Member 5 | Swagger docs with swagger-ui-express bonus               | Farida | 🟨     |                                                                                           |
 | Shared   | Error handling middleware                                | Team           | ✅     | Global notFound + errorHandler are wired in app startup.                                  |
 | Shared   | Authentication middleware                                | Team           | ✅     |                                                                                           |
-| Shared   | RESTful conventions applied                              | Team           | ⬜     |                                                                                           |
+| Shared   | RESTful conventions applied                              | Team           | 🟨     |                                                                                           |
 | Shared   | MongoDB models and relationships complete                | Team           | 🟨     | Database connection and User model exist; course/lesson/enrollment relationships pending. |
 | Shared   | Environment variables configured                         | Team           | ✅     |                                                                                           |
-| Shared   | GitHub repository deliverable complete                   | Team           | ⬜     |                                                                                           |
-| Shared   | API documentation deliverable complete                   | Team           | ⬜     |                                                                                           |
+| Shared   | GitHub repository deliverable complete                   | Team           | 🟨     |                                                                                           |
+| Shared   | API documentation deliverable complete                   | Team           | 🟨     |                                                                                           |
 
 ## How to Use This File
 
