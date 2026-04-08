@@ -63,10 +63,4 @@ export {
     updateCategory,
     deleteCategory
 };
-
-
-
-
-
-
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZDQyZGU3MmYxZTlhYmE5NDA5NzBhMCIsInJvbGUiOiJpbnN0cnVjdG9yIiwiZW1haWwiOiJiZWxhbEBnbWFpbC5jb20iLCJpYXQiOjE3NzU1MTMxMDAsImV4cCI6MTc3NTUxNjcwMH0.HZxyIhBXOoK0rMHTP-5XaGoPOIuA-CI5ZQxLv1ux160
+

@@ -25,7 +25,7 @@ export const createLesson = async (req, res, next) => {
   return res.status(201).json(jsend.success({ lesson }));
 };
 
-export const getLessons = async (req, res) => {
+export const getLessons = async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 10;
 
