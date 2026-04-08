@@ -6,6 +6,7 @@ import cors from "cors";
 import notFound from "./utils/notFound.js";
 import errorHandler from "./utils/errorHandler.js";
 import authRoutes from "./routes/authRoutes.js";
+import lessonRoutes from "./routes/lessonRoutes.js"
 import { generalLimiter, authLimiter } from "./config/rateLimiter.js";
 import { setupSwagger } from "./config/swagger.js";
 
@@ -25,6 +26,7 @@ app.use("/api/auth/login", authLimiter);
 app.use("/api/auth/register", authLimiter);
 
 app.use("/api/auth", authRoutes);
+app.use("/api/lessons",lessonRoutes)
 
 app.use(notFound);
 app.use(errorHandler);
