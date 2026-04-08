@@ -2,6 +2,7 @@ import Lesson from "../models/Lesson.js";
 import Course from "../models/Course.js";
 import jsend from "../utils/jsend.js";
 import AppError from "../utils/appError.js";
+import APIFeatures from "../utils/apiFeatures.js";
 
 export const createLesson = async (req, res, next) => {
   const { title, content, courseId } = req.body;
@@ -26,17 +27,20 @@ export const createLesson = async (req, res, next) => {
 };
 
 export const getLessons = async (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 10;
+  const features = new APIFeatures(
+    Lesson.find().populate("courseId", "title"),
+    req.query
+  )
+    .filter()      
+    .sort()        
+    .limitFields() 
+    .paginate(); 
 
-  const skip = (page - 1) * limit;
-
-  const lessons = await Lesson.find()
-    .populate("courseId", "title")
-    .skip(skip)
-    .limit(limit);
-
+  const lessons = await features.query;
   const total = await Lesson.countDocuments();
+
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 100;
 
   return res.status(200).json(
     jsend.success({
