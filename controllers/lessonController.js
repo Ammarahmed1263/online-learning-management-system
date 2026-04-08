@@ -29,12 +29,12 @@ export const createLesson = async (req, res, next) => {
 export const getLessons = async (req, res) => {
   const features = new APIFeatures(
     Lesson.find().populate("courseId", "title"),
-    req.query
+    req.query,
   )
-    .filter()      
-    .sort()        
-    .limitFields() 
-    .paginate(); 
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
 
   const lessons = await features.query;
   const total = await Lesson.countDocuments();
