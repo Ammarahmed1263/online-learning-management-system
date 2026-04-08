@@ -8,14 +8,13 @@ import authRoutes from "./routes/authRoutes.js";
 import categoryRouter from "./routes/categoryRoutes.js"
 import courseRouter from "./routes/courseRouters.js"
 import lessonRoutes from "./routes/lessonRoutes.js"
+import enrollmentsRoutes from "./routes/enrollmentRoutes.js"
 import { generalLimiter, authLimiter } from "./config/rateLimiter.js";
 import { setupSwagger } from "./config/swagger.js";
 import morgan from "morgan";
-import dotenv from 'dotenv';
 
 const app = express();
 
-dotenv.config();
 
 if (process.env.NODE_ENV === "production") {
     app.set("trust proxy", 1); // Trust first proxy for rate limiting "production only"
@@ -34,7 +33,9 @@ app.use("/api/auth/login", authLimiter);
 app.use("/api/auth/register", authLimiter);
 
 app.use("/api/auth", authRoutes);
-app.use("/api/lessons",lessonRoutes)
+app.use("/api/lessons",lessonRoutes);
+
+app.use("/api/enrollments",enrollmentsRoutes);
 
 app.use("/api/categories", categoryRouter)
 
