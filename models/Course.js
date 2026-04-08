@@ -1,7 +1,6 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
-const courseScehma = new mongoose.Schema(
-  {
+const courseSchema = new mongoose.Schema({
     title: {
       type: String,
       required: true,
@@ -23,12 +22,10 @@ const courseScehma = new mongoose.Schema(
       required: true,
     },
     instructor: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-  },
-  { timestamps: true },
-);
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
+}, { timestamps: true })
 
-export default mongoose.model("Course", courseScehma);
+export default mongoose.model("Course", courseSchema);

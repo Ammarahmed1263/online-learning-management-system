@@ -37,16 +37,6 @@ export const createCourseValidator = [
     .bail()
     .isMongoId()
     .withMessage("Invalid category ID format"),
-
-  body("user")
-    .exists()
-    .withMessage("User id is required")
-    .bail()
-    .notEmpty()
-    .withMessage("User id cannot be empty")
-    .bail()
-    .isMongoId()
-    .withMessage("Invalid User ID format"),
 ];
 
 export const updateCourseValidator = [
