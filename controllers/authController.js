@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import AppError from "../utils/appError.js";
 import jsend from "../utils/jsend.js";
-// import { userRoles } from "../utils/userRoles.js";
+import APIFeatures from "../utils/apiFeatures.js";
+import { userRoles } from "../utils/userRoles.js";
 
 const createToken = (user) =>
   jwt.sign(
@@ -82,7 +83,28 @@ export const getMe = async (req, res, next) => {
 };
 
 export const getAllUsers = async (req, res, next) => {
-  const users = await User.find().select("-password -__v").lean();
+  const features = new APIFeatures(User.find().lean(), req.query)
+    .filter()
+    .sort()
+    .limitFields();
 
-  return res.status(200).json(jsend.success({ users }));
+
+  const total = await features.query.clone().countDocuments();
+
+  features.paginate();
+
+  const users = await features.query;
+
+  const page = +req.query.page || 1;
+  const limit = +req.query.limit || 100;
+
+  return res.status(200).json(
+    jsend.success({
+      page,
+      totalPages: Math.ceil(total / limit),
+      total,
+      results: users.length,
+      users,
+    }),
+  );
 };
