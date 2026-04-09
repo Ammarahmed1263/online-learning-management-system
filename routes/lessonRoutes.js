@@ -22,13 +22,13 @@ import checkEnrollment from "../middlewares/checkEnrollmentMiddleware.js";
 
 const router = express.Router({ mergeParams: true });
 
-router.get("/", authorize, checkEnrollment, asyncWrapper(getLessons));
+router.get("/", authorize, asyncWrapper(checkEnrollment), asyncWrapper(getLessons));
 
 router.get(
   "/:id",
   validate(getLessonValidation),
   authorize,
-  checkEnrollment,
+  asyncWrapper(checkEnrollment),
   asyncWrapper(getLesson),
 );
 

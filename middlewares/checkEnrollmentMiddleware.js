@@ -2,7 +2,7 @@ import { userRoles } from "../utils/userRoles.js";
 import Enrollment from "../models/Enrollment.js";
 import AppError from "../utils/appError.js";
 
-const checkEnrollment = (req, res, next) => {
+const checkEnrollment = async (req, res, next) => {
   const courseId = req.params.courseId;
 
   if (
@@ -12,7 +12,7 @@ const checkEnrollment = (req, res, next) => {
     return next();
   }
 
-  const isEnrolled = Enrollment.findOne({
+  const isEnrolled = await Enrollment.findOne({
     course: courseId,
     student: req.user.id,
   });
