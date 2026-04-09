@@ -22,7 +22,7 @@ export const registerValidation = [
     .withMessage("password must be at least 8 characters"),
   body("role")
     .optional()
-    .isIn([userRoles.USER, userRoles.STUDENT, userRoles.INSTRUCTOR])
+    .isIn([userRoles.STUDENT, userRoles.INSTRUCTOR])
     .withMessage("role must be user, student, or instructor"),
 ];
 
