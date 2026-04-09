@@ -1,14 +1,33 @@
 import Enrollment from "../models/Enrollment.js";
 import AppError from "../utils/appError.js";
 import jsend from "../utils/jsend.js";
+import APIFeatures from "../utils/apiFeatures.js";
 
 const getAllEnrollments = async (req, res, next) => {
-  const enrollments = await Enrollment.find()
-    .populate("student", "userName email")
-    .populate("course", "title price");
+  const features = new APIFeatures(
+    Enrollment.find()
+      .populate("student", "userName email")
+      .populate("course", "title price"),
+    req.query,
+  )
+    .filter()
+    .sort()
+    .limitFields();
+
+  const total = await features.query.clone().countDocuments();
+
+  features.paginate();
+
+  const enrollments = await features.query;
+
+  const page = +req.query.page || 1;
+  const limit = +req.query.limit || 100;
 
   return res.status(200).json(
     jsend.success({
+      page,
+      totalPages: Math.ceil(total / limit),
+      total,
       results: enrollments.length,
       enrollments,
     }),
