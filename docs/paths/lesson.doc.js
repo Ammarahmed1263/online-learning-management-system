@@ -1,11 +1,19 @@
 /**
  * @swagger
- * /lessons:
+ * /courses/{courseId}/lessons:
  *   get:
  *     summary: Retrieve a list of all lessons
- *     description: Returns a paginated list of lessons. Accessible by anyone.
+ *     description: Returns a paginated list of lessons for a specific course. Requires authentication and enrollment in that course (or admin/instructor role).
  *     tags: [Lessons]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
+ *       - in: path
+ *         name: courseId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The course ID (MongoDB ObjectId)
  *       - in: query
  *         name: page
  *         schema:
@@ -25,6 +33,24 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/LessonListResponse'
+ *       401:
+ *         description: |
+ *           Token missing or invalid. Possible messages:
+ *           - `"No token provided"`
+ *           - `"Token expired, please log in again"`
+ *           - `"Invalid token"`
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       403:
+ *         description: |
+ *           Access denied for non-enrolled students. Message:
+ *           `"Access denied. You must be enrolled in this course to view its lessons."`
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  *       429:
  *         description: |
  *           Rate limit exceeded. Message: `"Too many requests from this IP, please try again after 15 minutes."`
@@ -46,6 +72,13 @@
  *     tags: [Lessons]
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: courseId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The course ID (MongoDB ObjectId)
  *     requestBody:
  *       required: true
  *       content:
@@ -108,12 +141,20 @@
  *             schema:
  *               $ref: '#/components/schemas/InternalErrorResponse'
  *
- * /lessons/{id}:
+ * /courses/{courseId}/lessons/{id}:
  *   get:
  *     summary: Get a lesson by ID
- *     description: Retrieve details of a specific lesson. Accessible by anyone.
+ *     description: Retrieve details of a specific lesson for a specific course. Requires authentication and enrollment in that course (or admin/instructor role).
  *     tags: [Lessons]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
+ *       - in: path
+ *         name: courseId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The course ID (MongoDB ObjectId)
  *       - in: path
  *         name: id
  *         required: true
@@ -134,6 +175,24 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/ValidationErrorResponse'
+ *       401:
+ *         description: |
+ *           Token missing or invalid. Possible messages:
+ *           - `"No token provided"`
+ *           - `"Token expired, please log in again"`
+ *           - `"Invalid token"`
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       403:
+ *         description: |
+ *           Access denied for non-enrolled students. Message:
+ *           `"Access denied. You must be enrolled in this course to view its lessons."`
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
  *       404:
  *         description: |
  *           Lesson not found. Message: `"Lesson not found"`
@@ -163,6 +222,12 @@
  *     security:
  *       - bearerAuth: []
  *     parameters:
+ *       - in: path
+ *         name: courseId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The course ID (MongoDB ObjectId)
  *       - in: path
  *         name: id
  *         required: true
@@ -238,6 +303,12 @@
  *     security:
  *       - bearerAuth: []
  *     parameters:
+ *       - in: path
+ *         name: courseId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The course ID (MongoDB ObjectId)
  *       - in: path
  *         name: id
  *         required: true

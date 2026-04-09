@@ -18,15 +18,18 @@ import {
   getLessonValidation,
 } from "../validators/lessonValidation.js";
 import { userRoles } from "../utils/userRoles.js";
+import checkEnrollment from "../middlewares/checkEnrollmentMiddleware.js";
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
-router.get("/", asyncWrapper(getLessons));
+router.get("/", authorize, checkEnrollment, asyncWrapper(getLessons));
 
 router.get(
   "/:id",
   validate(getLessonValidation),
-  asyncWrapper(getLesson)
+  authorize,
+  checkEnrollment,
+  asyncWrapper(getLesson),
 );
 
 router.post(
@@ -34,7 +37,7 @@ router.post(
   validate(createLessonValidation),
   authorize,
   allowTo(userRoles.INSTRUCTOR),
-  asyncWrapper(createLesson)
+  asyncWrapper(createLesson),
 );
 
 router.put(
@@ -42,7 +45,7 @@ router.put(
   validate(updateLessonValidation),
   authorize,
   allowTo(userRoles.INSTRUCTOR),
-  asyncWrapper(updateLesson)
+  asyncWrapper(updateLesson),
 );
 
 router.delete(
@@ -50,7 +53,7 @@ router.delete(
   validate(getLessonValidation),
   authorize,
   allowTo(userRoles.INSTRUCTOR),
-  asyncWrapper(deleteLesson)
+  asyncWrapper(deleteLesson),
 );
 
 export default router;
