@@ -9,6 +9,7 @@ import categoryRouter from "./routes/categoryRoutes.js";
 import courseRouter from "./routes/courseRouters.js";
 import lessonRoutes from "./routes/lessonRoutes.js";
 import enrollmentsRoutes from "./routes/enrollmentRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
 import { generalLimiter, authLimiter } from "./config/rateLimiter.js";
 import { setupSwagger } from "./config/swagger.js";
 import morgan from "morgan";
@@ -38,6 +39,8 @@ app.use("/api/courses", courseRouter);
 app.use("/api/categories", categoryRouter);
 
 app.use("/api/enrollments", enrollmentsRoutes);
+app.use("/api/courses/:courseId/reviews", reviewRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
