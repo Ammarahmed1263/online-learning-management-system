@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const lessonSchema = new mongoose.Schema(
+const lessonSchema = new Schema(
   {
     title: {
       type: String,
@@ -13,13 +13,13 @@ const lessonSchema = new mongoose.Schema(
       trim: true,
     },
     courseId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Course",
       required: true,
       index: true,
     },
     instructorId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -27,4 +27,5 @@ const lessonSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export default mongoose.model("Lesson", lessonSchema);
+const Lesson = model("Lesson", lessonSchema);
+export default Lesson;
