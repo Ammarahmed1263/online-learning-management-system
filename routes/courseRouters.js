@@ -22,9 +22,9 @@ router
   .route("/")
   .get(getCourses)
   .post(
-    validate(createCourseValidator),
     authorize,
     allowTo(userRoles.INSTRUCTOR),
+    validate(createCourseValidator),
     createCourse,
   );
 
@@ -32,16 +32,16 @@ router
   .route("/:id")
   .get(validate(courseIdValidator), getCourse)
   .patch(
-    validate(courseIdValidator),
-    validate(updateCourseValidator),
     authorize,
     allowTo(userRoles.INSTRUCTOR),
+    validate(courseIdValidator),
+    validate(updateCourseValidator),
     updateCourse,
   )
   .delete(
-    validate(courseIdValidator),
     authorize,
     allowTo(userRoles.INSTRUCTOR),
+    validate(courseIdValidator),
     deleteCourse,
   );
 
