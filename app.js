@@ -26,7 +26,14 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(cors());
 app.use(express.json());
-setupSwagger(app);
+
+try {
+  setupSwagger(app);
+} catch (error) {
+  if (process.env.NODE_ENV !== "production") {
+    console.warn("Swagger setup failed:", error.message);
+  }
+}
 
 app.use("/api", generalLimiter);
 app.use("/api/auth/login", authLimiter);
@@ -49,7 +56,9 @@ const startServer = async () => {
   await connectDB();
 
   app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
+    if (process.env.NODE_ENV !== "production") {
+      console.log(`Server is running on port ${process.env.PORT}`);
+    }
   });
 };
 
