@@ -79,39 +79,39 @@ Online Learning Management System (LMS)
 
 Legend: ✅ = Completed, ⬜ = Not Completed, 🟨 = In Progress
 
-| Area     | Objective                                                | Owner          | Status | Notes                                                                                     |
-| -------- | -------------------------------------------------------- | -------------- | ------ | ----------------------------------------------------------------------------------------- |
-| Member 1 | User Register endpoint                                   | Ali Alaa Eldin | ✅     | Implemented at POST /api/v1/auth/register.                                                |
-| Member 1 | User Login endpoint                                      | Ali Alaa Eldin | ✅     | Implemented at POST /api/v1/auth/login.                                                   |
-| Member 1 | Password hashing with bcryptjs                           | Ali Alaa Eldin | ✅     | Implemented in User schema pre-save hook.                                                 |
-| Member 1 | JWT generation and verification                          | Ali Alaa Eldin | ✅     | JWT issued on login/register and verified by auth middleware for protected routes.        |
-| Member 1 | Roles setup (Admin, User, Instructor, Student as needed) | Ali Alaa Eldin | ✅     | Roles extended to include Instructor and Student in role constants and user schema enum.  |
-| Member 2 | Course CRUD                                              | Belal Hesham   | ⬜     |                                                                                           |
-| Member 2 | Category CRUD                                            | Belal Hesham   | ⬜     |                                                                                           |
-| Member 2 | Instructor-only course creation                          | Belal Hesham   | ⬜     |                                                                                           |
-| Member 2 | Instructor can edit/delete only own courses              | Belal Hesham   | ⬜     |                                                                                           |
-| Member 2 | Course search and filtering bonus                        | Belal Hesham   | ⬜     |                                                                                           |
-| Member 3 | Lesson or Module CRUD                                    | Ahmed Khaled   | ✅     |                                                                                           |
-| Member 3 | Enforce lesson courseId relation                         | Ahmed Khaled   | ✅     |                                                                                           |
-| Member 3 | Only course owner instructor can add lesson              | Ahmed Khaled   | ✅     |                                                                                           |
-| Member 3 | Lesson pagination bonus                                  | Ahmed Khaled   | ✅     |                                                                                           |
-| Member 4 | Enrollment create/list/remove flow                       | Ammar | ✅     |                                                                                           |
-| Member 4 | checkEnrollment middleware                               | Ammar & Farida | ⬜     |                                                                                           |
-| Member 4 | Protect lesson GET routes by enrollment                  | Ammar & Farida | ⬜     |                                                                                           |
-| Member 4 | Student dashboard my-courses bonus                       | Ammar | ⬜     |                                                                                           |
-| Member 5 | Review model and CRUD                                    | Farida | ⬜     |                                                                                           |
-| Member 5 | Only enrolled student can review                         | Farida | ⬜     |                                                                                           |
-| Member 5 | 1-5 star validation and text review                      | Farida | ⬜     |                                                                                           |
-| Member 5 | Admin get all users endpoint finalization                | Ammar | ✅     |                                                                                           |
-| Member 5 | Global express-rate-limit bonus                          | Ammar | ✅     |                                                                                           |
-| Member 5 | Swagger docs with swagger-ui-express bonus               | Farida | 🟨     |                                                                                           |
-| Shared   | Error handling middleware                                | Team           | ✅     | Global notFound + errorHandler are wired in app startup.                                  |
-| Shared   | Authentication middleware                                | Team           | ✅     |                                                                                           |
-| Shared   | RESTful conventions applied                              | Team           | 🟨     |                                                                                           |
-| Shared   | MongoDB models and relationships complete                | Team           | 🟨     | Database connection and User model exist; course/lesson/enrollment relationships pending. |
-| Shared   | Environment variables configured                         | Team           | ✅     |                                                                                           |
-| Shared   | GitHub repository deliverable complete                   | Team           | 🟨     |                                                                                           |
-| Shared   | API documentation deliverable complete                   | Team           | 🟨     |                                                                                           |
+| Objective                                                | Owner          | Status | Notes                                                                                     |
+| -------------------------------------------------------- | -------------- | ------ | ----------------------------------------------------------------------------------------- |
+| User Register endpoint                                   | Ali Alaa Eldin | ✅     | Implemented at POST /api/v1/auth/register.                                                |
+| User Login endpoint                                      | Ali Alaa Eldin | ✅     | Implemented at POST /api/v1/auth/login.                                                   |
+| Password hashing with bcryptjs                           | Ali Alaa Eldin | ✅     | Implemented in User schema pre-save hook.                                                 |
+| JWT generation and verification                          | Ali Alaa Eldin | ✅     | JWT issued on login/register and verified by auth middleware for protected routes.        |
+| Roles setup (Admin, User, Instructor, Student as needed) | Ali Alaa Eldin | ✅     | Roles extended to include Instructor and Student in role constants and user schema enum.  |
+| Course CRUD                                              | Belal Hesham   | ✅     |                                                                                           |
+| Category CRUD                                            | Belal Hesham   | ✅     |                                                                                           |
+| Instructor-only course creation                          | Belal Hesham   | ✅     |                                                                                           |
+| Instructor can edit/delete only own courses              | Belal Hesham   | ✅     |                                                                                           |
+| Course search and filtering bonus                        | Belal Hesham   | ⬜     |                                                                                           |
+| Lesson or Module CRUD                                    | Ahmed Khaled   | ✅     |                                                                                           |
+| Enforce lesson courseId relation                         | Ahmed Khaled   | ✅     |                                                                                           |
+| Only course owner instructor can add lesson              | Ahmed Khaled   | ✅     |                                                                                           |
+| Lesson pagination bonus                                  | Ahmed Khaled   | ✅     |                                                                                           |
+| Enrollment create/list/remove flow                       | Ammar | ✅     |                                                                                           |
+| checkEnrollment middleware                               | Farida | ✅     |                                                                                           |
+| Protect lesson GET routes by enrollment                  | Farida | ✅     |                                                                                           |
+| Student dashboard my-courses bonus                       | Ammar | ✅     |                                                                                           |
+| Review model and CRUD                                    | Farida | ✅     |                                                                                           |
+| Only enrolled student can review                         | Farida | ✅     |                                                                                           |
+| 1-5 star validation and text review                      | Farida | ✅     |                                                                                           |
+| Admin get all users endpoint finalization                | Ammar | ✅     |                                                                                           |
+| Global express-rate-limit bonus                          | Ammar | ✅     |                                                                                           |
+| Swagger docs with swagger-ui-express bonus               | Farida | ✅     |                                                                                           |
+| Error handling middleware                                | Ammar           | ✅     | Global notFound + errorHandler are wired in app startup.                                  |
+| Authentication middleware                                | Ammar           | ✅     |                                                                                           |
+| RESTful conventions applied                              | Team           | 🟨     |                                                                                           |
+| MongoDB models and relationships complete                | Team           | 🟨     | Database connection and User model exist; course/lesson/enrollment relationships pending. |
+| Environment variables configured                         | Team           | ✅     |                                                                                           |
+| GitHub repository deliverable complete                   | Team           | 🟨     |                                                                                           |
+| API documentation deliverable complete                   | Team           | 🟨     |                                                                                           |
 
 ## How to Use This File
 
