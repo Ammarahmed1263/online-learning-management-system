@@ -18,37 +18,31 @@ import {
 
 const router = express.Router({ mergeParams: true });
 
-router.get(
-  "/my-reviews",
-  authorize,
-  allowTo(userRoles.STUDENT),
-  getMyReviews,
-);
+router.get("/my-reviews", authorize, allowTo(userRoles.STUDENT), getMyReviews);
 
-router.get("/", getCourseReviews);
+router
+  .route("/")
+  .get(getCourseReviews)
+  .post(
+    authorize,
+    allowTo(userRoles.STUDENT),
+    validate(createReviewValidator),
+    createReview,
+  );
 
-router.post(
-  "/",
-  validate(createReviewValidator),
-  authorize,
-  allowTo(userRoles.STUDENT),
-  createReview,
-);
-
-router.patch(
-  "/:id",
-  validate(updateReviewValidator),
-  authorize,
-  allowTo(userRoles.STUDENT),
-  updateReview,
-);
-
-router.delete(
-  "/:id",
-  validate(reviewIdValidator),
-  authorize,
-  allowTo(userRoles.STUDENT, userRoles.ADMIN),
-  deleteReview,
-);
+router
+  .route("/:id")
+  .patch(
+    authorize,
+    allowTo(userRoles.STUDENT),
+    validate(updateReviewValidator),
+    updateReview,
+  )
+  .delete(
+    authorize,
+    allowTo(userRoles.STUDENT, userRoles.ADMIN),
+    validate(reviewIdValidator),
+    deleteReview,
+  );
 
 export default router;
