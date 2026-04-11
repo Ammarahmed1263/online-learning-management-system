@@ -8,8 +8,13 @@ const logAction = async (action, userId, details) => {
       details,
     });
   } catch (error) {
-    if (process.env.NODE_ENV !== "production") {
-      console.error("Critical Logging Failure:", error);
+    const errorMsg = `Failed to log ${action}: ${error.message}`;
+
+    if (process.env.NODE_ENV === "development") {
+      console.error(errorMsg);
+      throw new AppError(errorMsg, 500);
+    } else {
+      console.error(errorMsg);
     }
   }
 };

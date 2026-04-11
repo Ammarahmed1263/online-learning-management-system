@@ -5,7 +5,9 @@ const handleValidationError = (err) =>
     "Validation failed",
     400,
     err.validationErrors.reduce((acc, e) => {
-      acc[e.path] = e.msg;
+      if (!acc[e.path]) {
+        acc[e.path] = e.msg;
+      }
       return acc;
     }, {}),
   );
