@@ -16,44 +16,32 @@ import {
   createLessonValidation,
   updateLessonValidation,
   getLessonValidation,
+  lessonCourseParamValidation,
 } from "../validators/lessonValidation.js";
 import { userRoles } from "../utils/userRoles.js";
 import checkEnrollment from "../middlewares/checkEnrollmentMiddleware.js";
 
 const router = express.Router({ mergeParams: true });
 
-router.get("/", authorize, asyncWrapper(checkEnrollment), asyncWrapper(getLessons));
+router.use(authorize);
 
+router.get(
+  "/",
+  validate(lessonCourseParamValidation),
+  asyncWrapper(checkEnrollment),
+  getLessons,
+);
 router.get(
   "/:id",
   validate(getLessonValidation),
-  authorize,
   asyncWrapper(checkEnrollment),
-  asyncWrapper(getLesson),
+  getLesson,
 );
 
-router.post(
-  "/",
-  validate(createLessonValidation),
-  authorize,
-  allowTo(userRoles.INSTRUCTOR),
-  asyncWrapper(createLesson),
-);
+router.use(allowTo(userRoles.INSTRUCTOR));
 
-router.put(
-  "/:id",
-  validate(updateLessonValidation),
-  authorize,
-  allowTo(userRoles.INSTRUCTOR),
-  asyncWrapper(updateLesson),
-);
-
-router.delete(
-  "/:id",
-  validate(getLessonValidation),
-  authorize,
-  allowTo(userRoles.INSTRUCTOR),
-  asyncWrapper(deleteLesson),
-);
+router.post("/", validate(createLessonValidation), createLesson);
+router.put("/:id", validate(updateLessonValidation), updateLesson);
+router.delete("/:id", validate(getLessonValidation), deleteLesson);
 
 export default router;
