@@ -1,9 +1,28 @@
 import { body, param } from "express-validator";
 
 export const createLessonValidation = [
-  body("title").trim().notEmpty().withMessage("Title is required"),
-  body("content").notEmpty().withMessage("Content is required"),
-  body("courseId").isMongoId().withMessage("Invalid courseId"),
+  body("title")
+    .trim()
+    .notEmpty()
+    .withMessage("Title is required")
+    .bail()
+    .isString()
+    .withMessage("Title must be a string")
+    .bail()
+    .isLength({ min: 3, max: 200 })
+    .withMessage("Title must be between 3 and 200 characters"),
+
+  body("content")
+    .notEmpty()
+    .withMessage("Content is required")
+    .bail()
+    .isString()
+    .withMessage("Content must be a string")
+    .bail()
+    .isLength({ min: 10 })
+    .withMessage("Content must be at least 10 characters"),
+
+  body("courseId").isMongoId().withMessage("Invalid courseId format"),
 ];
 
 export const updateLessonValidation = [
@@ -12,4 +31,8 @@ export const updateLessonValidation = [
 
 export const getLessonValidation = [
   param("id").isMongoId().withMessage("Invalid lesson id"),
+];
+
+export const lessonCourseParamValidation = [
+  param("courseId").isMongoId().withMessage("Invalid courseId format"),
 ];

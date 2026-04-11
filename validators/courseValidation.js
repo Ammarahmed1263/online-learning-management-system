@@ -40,14 +40,27 @@ export const createCourseValidator = [
 ];
 
 export const updateCourseValidator = [
-  body("title").optional().isString().withMessage("Title must be a string"),
+  body("title")
+    .optional()
+    .trim()
+    .isString()
+    .withMessage("Title must be a string")
+    .bail()
+    .isLength({ min: 3 })
+    .withMessage("Title must be at least 3 characters"),
 
   body("description")
     .optional()
     .isString()
     .withMessage("Description must be a string"),
 
-  body("price").optional().isNumeric().withMessage("Price must be a number"),
+  body("price")
+    .optional()
+    .isNumeric()
+    .withMessage("Price must be a number")
+    .bail()
+    .custom((value) => value >= 0)
+    .withMessage("Price cannot be negative"),
 
   body("category")
     .optional()
