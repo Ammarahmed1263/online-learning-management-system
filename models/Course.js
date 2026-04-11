@@ -1,6 +1,7 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const courseSchema = new mongoose.Schema({
+const courseSchema = new Schema(
+  {
     title: {
       type: String,
       required: true,
@@ -15,17 +16,22 @@ const courseSchema = new mongoose.Schema({
     price: {
       type: Number,
       required: true,
+      min: [0, "Price cannot be negative"],
+      max: [999999, "Price is too high"],
     },
     category: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Category",
       required: true,
     },
     instructor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    }
-}, { timestamps: true })
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  { timestamps: true },
+);
 
-export default mongoose.model("Course", courseSchema);
+const Course = model("Course", courseSchema);
+export default Course;
