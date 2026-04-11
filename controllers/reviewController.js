@@ -32,9 +32,7 @@ const createReview = asyncWrapper(async (req, res, next) => {
   });
 
   if (existingReview) {
-    return next(
-      new AppError("You have already reviewed this course.", 400),
-    );
+    return next(new AppError("You have already reviewed this course.", 400));
   }
 
   const review = await Review.create({

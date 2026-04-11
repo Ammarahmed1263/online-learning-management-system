@@ -2,8 +2,9 @@ import Enrollment from "../models/Enrollment.js";
 import AppError from "../utils/appError.js";
 import jsend from "../utils/jsend.js";
 import APIFeatures from "../utils/apiFeatures.js";
+import asyncWrapper from "../utils/asyncWrapper.js";
 
-const getAllEnrollments = async (req, res, next) => {
+const getAllEnrollments = asyncWrapper(async (req, res, next) => {
   const features = new APIFeatures(
     Enrollment.find()
       .populate("student", "userName email")
@@ -32,9 +33,9 @@ const getAllEnrollments = async (req, res, next) => {
       enrollments,
     }),
   );
-};
+});
 
-const enrollStudent = async (req, res, next) => {
+const enrollStudent = asyncWrapper(async (req, res, next) => {
   const studentId = req.user.id;
   const courseId = req.body.courseId;
 
@@ -57,9 +58,9 @@ const enrollStudent = async (req, res, next) => {
       enrollment: newEnrollment,
     }),
   );
-};
+});
 
-const unEnrollStudent = async (req, res, next) => {
+const unEnrollStudent = asyncWrapper(async (req, res, next) => {
   const { courseId } = req.params;
   const studentId = req.user.id;
 
@@ -77,9 +78,9 @@ const unEnrollStudent = async (req, res, next) => {
       message: "Successfully unEnrolled from the course.",
     }),
   );
-};
+});
 
-const getMyCourses = async (req, res, next) => {
+const getMyCourses = asyncWrapper(async (req, res, next) => {
   const userId = req.user.id;
 
   const enrollments = await Enrollment.find({ student: userId })
@@ -94,6 +95,6 @@ const getMyCourses = async (req, res, next) => {
       courses,
     }),
   );
-};
+});
 
 export { enrollStudent, unEnrollStudent, getMyCourses, getAllEnrollments };

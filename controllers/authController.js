@@ -4,6 +4,7 @@ import AppError from "../utils/appError.js";
 import jsend from "../utils/jsend.js";
 import APIFeatures from "../utils/apiFeatures.js";
 import { userRoles } from "../utils/userRoles.js";
+import asyncWrapper from "../utils/asyncWrapper.js";
 
 const createToken = (user) =>
   jwt.sign(
@@ -21,7 +22,7 @@ const pickPublicUserFields = (user) => ({
   updatedAt: user.updatedAt,
 });
 
-export const register = async (req, res, next) => {
+export const register = asyncWrapper(async (req, res, next) => {
   const { userName, email, password, role } = req.body;
 
   if (role === userRoles.ADMIN) {
@@ -44,9 +45,9 @@ export const register = async (req, res, next) => {
       user: pickPublicUserFields(user),
     }),
   );
-};
+});
 
-export const login = async (req, res, next) => {
+export const login = asyncWrapper(async (req, res, next) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email }).select("+password");
@@ -67,9 +68,9 @@ export const login = async (req, res, next) => {
       user: pickPublicUserFields(user),
     }),
   );
-};
+});
 
-export const getMe = async (req, res, next) => {
+export const getMe = asyncWrapper(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   if (!user) {
     return next(new AppError("User not found", 404));
@@ -80,14 +81,13 @@ export const getMe = async (req, res, next) => {
       user: pickPublicUserFields(user),
     }),
   );
-};
+});
 
-export const getAllUsers = async (req, res, next) => {
+export const getAllUsers = asyncWrapper(async (req, res, next) => {
   const features = new APIFeatures(User.find().lean(), req.query)
     .filter()
     .sort()
     .limitFields();
-
 
   const total = await features.query.clone().countDocuments();
 
@@ -107,4 +107,4 @@ export const getAllUsers = async (req, res, next) => {
       users,
     }),
   );
-};
+});
