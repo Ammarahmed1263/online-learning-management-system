@@ -38,7 +38,7 @@
  *
  *     CreateLessonRequest:
  *       type: object
- *       required: [title, content, courseId]
+ *       required: [title, content]
  *       properties:
  *         title:
  *           type: string
@@ -46,9 +46,6 @@
  *         content:
  *           type: string
  *           example: Basic hooks like useState and useEffect
- *         courseId:
- *           type: string
- *           example: 60d0fe4f5311236168a109cb
  *
  *     UpdateLessonRequest:
  *       type: object
