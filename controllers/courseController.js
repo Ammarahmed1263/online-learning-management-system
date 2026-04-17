@@ -4,6 +4,7 @@ import jsend from "../utils/jsend.js";
 import AppError from "../utils/appError.js";
 import logAction from "../utils/logger.js";
 import logActions from "../utils/logActions.js";
+import APIFeatures from "../utils/apiFeatures.js";
 
 const createCourse = asyncWrapper(async (req, res, next) => {
   const { title, description, price, category } = req.body;
@@ -28,11 +29,47 @@ const createCourse = asyncWrapper(async (req, res, next) => {
 });
 
 const getCourses = asyncWrapper(async (req, res, next) => {
-  const courses = await Course.find()
-    .populate("category", "name description")
-    .populate("instructor", "userName email")
-    .lean();
-  return res.status(200).json(jsend.success({ courses }));
+  const keyword = req.query.keyword?.trim();
+  const queryWithoutKeyword = { ...req.query };
+  delete queryWithoutKeyword.keyword;
+
+  const courseSearchQuery = keyword
+    ? {
+      $or: [
+        { title: { $regex: keyword, $options: "i" } },
+        { description: { $regex: keyword, $options: "i" } },
+      ],
+    }
+    : {};
+
+  const features = new APIFeatures(
+    Course.find(courseSearchQuery)
+      .populate("category", "name description")
+      .populate("instructor", "userName email"),
+    queryWithoutKeyword,
+  )
+    .filter()
+    .sort()
+    .limitFields();
+
+  const total = await features.query.clone().countDocuments();
+
+  features.paginate();
+
+  const courses = await features.query.lean();
+
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 100;
+
+  return res.status(200).json(
+    jsend.success({
+      page,
+      totalPages: Math.ceil(total / limit),
+      total,
+      results: courses.length,
+      courses,
+    }),
+  );
 });
 
 const getCourse = asyncWrapper(async (req, res, next) => {

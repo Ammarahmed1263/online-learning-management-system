@@ -38,8 +38,8 @@ Online Learning Management System (LMS)
 - Protect routes using JWT
 - Only authenticated users can access protected routes
 - Role-based access control:
-    - Admin: Full CRUD
-    - User: Read-only access
+  - Admin: Full CRUD
+  - User: Read-only access
 
 ### Middleware
 
@@ -90,23 +90,23 @@ Legend: ✅ = Completed, ⬜ = Not Completed, 🟨 = In Progress
 | Category CRUD                                            | Belal Hesham   | ✅     |                                                                                           |
 | Instructor-only course creation                          | Belal Hesham   | ✅     |                                                                                           |
 | Instructor can edit/delete only own courses              | Belal Hesham   | ✅     |                                                                                           |
-| Course search and filtering bonus                        | Belal Hesham   | ⬜     |                                                                                           |
+| Course search and filtering bonus                        | Belal Hesham   | ✅     |                                                                                           |
 | Lesson or Module CRUD                                    | Ahmed Khaled   | ✅     |                                                                                           |
 | Enforce lesson courseId relation                         | Ahmed Khaled   | ✅     |                                                                                           |
 | Only course owner instructor can add lesson              | Ahmed Khaled   | ✅     |                                                                                           |
 | Lesson pagination bonus                                  | Ahmed Khaled   | ✅     |                                                                                           |
-| Enrollment create/list/remove flow                       | Ammar | ✅     |                                                                                           |
-| checkEnrollment middleware                               | Farida | ✅     |                                                                                           |
-| Protect lesson GET routes by enrollment                  | Farida | ✅     |                                                                                           |
-| Student dashboard my-courses bonus                       | Ammar | ✅     |                                                                                           |
-| Review model and CRUD                                    | Farida | ✅     |                                                                                           |
-| Only enrolled student can review                         | Farida | ✅     |                                                                                           |
-| 1-5 star validation and text review                      | Farida | ✅     |                                                                                           |
-| Admin get all users endpoint finalization                | Ammar | ✅     |                                                                                           |
-| Global express-rate-limit bonus                          | Ammar | ✅     |                                                                                           |
-| Swagger docs with swagger-ui-express bonus               | Farida | ✅     |                                                                                           |
-| Error handling middleware                                | Ammar           | ✅     | Global notFound + errorHandler are wired in app startup.                                  |
-| Authentication middleware                                | Ammar           | ✅     |                                                                                           |
+| Enrollment create/list/remove flow                       | Ammar          | ✅     |                                                                                           |
+| checkEnrollment middleware                               | Farida         | ✅     |                                                                                           |
+| Protect lesson GET routes by enrollment                  | Farida         | ✅     |                                                                                           |
+| Student dashboard my-courses bonus                       | Ammar          | ✅     |                                                                                           |
+| Review model and CRUD                                    | Farida         | ✅     |                                                                                           |
+| Only enrolled student can review                         | Farida         | ✅     |                                                                                           |
+| 1-5 star validation and text review                      | Farida         | ✅     |                                                                                           |
+| Admin get all users endpoint finalization                | Ammar          | ✅     |                                                                                           |
+| Global express-rate-limit bonus                          | Ammar          | ✅     |                                                                                           |
+| Swagger docs with swagger-ui-express bonus               | Farida         | ✅     |                                                                                           |
+| Error handling middleware                                | Ammar          | ✅     | Global notFound + errorHandler are wired in app startup.                                  |
+| Authentication middleware                                | Ammar          | ✅     |                                                                                           |
 | RESTful conventions applied                              | Team           | 🟨     |                                                                                           |
 | MongoDB models and relationships complete                | Team           | 🟨     | Database connection and User model exist; course/lesson/enrollment relationships pending. |
 | Environment variables configured                         | Team           | ✅     |                                                                                           |
