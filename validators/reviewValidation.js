@@ -46,6 +46,12 @@ export const updateReviewValidator = [
     .withMessage("Comment must be a string"),
 ];
 
+export const courseIdValidator = [
+  param("courseId")
+    .isMongoId()
+    .withMessage("Invalid course ID format"),
+];
+
 export const reviewIdValidator = [
   param("courseId")
     .isMongoId()

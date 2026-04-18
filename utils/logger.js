@@ -1,4 +1,5 @@
 import Log from "../models/Log.js";
+import AppError from "./appError.js";
 
 const logAction = async (action, userId, details) => {
   try {

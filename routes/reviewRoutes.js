@@ -13,6 +13,7 @@ import {
 import {
   createReviewValidator,
   updateReviewValidator,
+  courseIdValidator,
   reviewIdValidator,
 } from "../validators/reviewValidation.js";
 
@@ -22,7 +23,7 @@ router.get("/my-reviews", authorize, allowTo(userRoles.STUDENT), getMyReviews);
 
 router
   .route("/")
-  .get(getCourseReviews)
+  .get(validate(courseIdValidator), getCourseReviews)
   .post(
     authorize,
     allowTo(userRoles.STUDENT),

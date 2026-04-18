@@ -19,6 +19,13 @@
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/CourseReviewsResponse'
+ *       400:
+ *         description: |
+ *           Invalid course ID format. Example: `{ "status": "fail", "data": { "courseId": "Invalid course ID format" } }`
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ValidationErrorResponse'
  *       429:
  *         description: |
  *           Rate limit exceeded. Message: `"Too many requests from this IP, please try again after 15 minutes."`
@@ -248,7 +255,7 @@
  *               $ref: '#/components/schemas/ErrorResponse'
  *       403:
  *         description: |
- *           Three possible 403 errors:
+ *           Two possible 403 errors:
  *           - `"You don't have permission to access this resource"` — role is not `student` or `admin`
  *           - `"You do not have permission to delete this review."` — student trying to delete another's review
  *         content:
