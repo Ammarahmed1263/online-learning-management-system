@@ -27,6 +27,10 @@ const userSchema = new Schema(
             enum: Object.values(userRoles),
             default: userRoles.STUDENT,
         },
+        stripeCustomerId: {
+            type: String,
+            select: false,
+        },
     },
     { timestamps: true },
 );

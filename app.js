@@ -10,6 +10,8 @@ import courseRouter from "./routes/courseRouters.js";
 import lessonRoutes from "./routes/lessonRoutes.js";
 import enrollmentsRoutes from "./routes/enrollmentRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
+import webhookRoute from "./routes/webhookRoute.js";
 import { generalLimiter, authLimiter } from "./config/rateLimiter.js";
 import { setupSwagger } from "./config/swagger.js";
 import morgan from "morgan";
@@ -25,6 +27,13 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use(cors());
+
+app.use(
+  "/api/webhook",
+  express.raw({ type: "application/json" }),
+  webhookRoute,
+);
+
 app.use(express.json());
 
 try {
@@ -48,6 +57,8 @@ app.use("/api/categories", categoryRouter);
 app.use("/api/enrollments", enrollmentsRoutes);
 app.use("/api/courses/:courseId/reviews", reviewRoutes);
 app.use("/api/reviews", reviewRoutes);
+
+app.use("/api/payments", paymentRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
