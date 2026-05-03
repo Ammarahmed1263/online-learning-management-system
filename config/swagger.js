@@ -17,11 +17,10 @@ const options = {
         url: `http://localhost:${appPort}/api`,
         description: "Development server",
       },
-      // Production server - uncomment and update when ready
-      // {
-      //   url: process.env.API_BASE_URL || "https://api.yourdomain.com/api",
-      //   description: "Production server",
-      // },
+      {
+        url: process.env.API_BASE_URL || "https://api.yourdomain.com/api",
+        description: "Production server",
+      },
     ],
     components: {
       securitySchemes: {
