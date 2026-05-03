@@ -80,6 +80,7 @@ const getCheckoutSession = asyncWrapper(async (req, res) => {
       totalAmount: session.amount_total / 100,
       currency: session.currency,
       items: session.line_items.data.map((item) => item.description),
+      totalDetails: session.total_details,
     }),
   );
 });
