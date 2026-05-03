@@ -16,6 +16,7 @@ const createCourse = asyncWrapper(async (req, res, next) => {
     price,
     category,
     instructor: userId,
+    image: req.file?.path,
   });
   await newCourse.save();
 
@@ -87,22 +88,24 @@ const updateCourse = asyncWrapper(async (req, res, next) => {
   const { id } = req.params;
   const { title, description, price, category } = req.body;
   const course = await Course.findById(id);
-  // Check if it exists
   if (!course) {
     return next(new AppError("Course not found", 404));
   }
-  //  OWNERSHIP CHECK
   if (course.instructor.toString() !== req.user.id.toString()) {
     return next(
       new AppError("You do not have permission to modify this course", 403),
     );
   }
 
-  const updatedCourse = await Course.findByIdAndUpdate(
-    id,
-    { title, description, price, category },
-    { new: true, runValidators: true },
-  ).lean();
+  const updateData = { title, description, price, category };
+  if (req.file?.path) {
+    updateData.image = req.file.path;
+  }
+
+  const updatedCourse = await Course.findByIdAndUpdate(id, updateData, {
+    returnDocument: "after",
+    runValidators: true,
+  }).lean();
 
   await logAction(
     logActions.UPDATE_COURSE,
@@ -112,6 +115,7 @@ const updateCourse = asyncWrapper(async (req, res, next) => {
 
   return res.status(200).json(jsend.success({ updatedCourse }));
 });
+
 
 const deleteCourse = asyncWrapper(async (req, res, next) => {
   const { id } = req.params;

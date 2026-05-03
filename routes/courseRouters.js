@@ -15,6 +15,7 @@ import {
   updateCourse,
   deleteCourse,
 } from "../controllers/courseController.js";
+import upload from "../middlewares/uploadMiddleware.js";
 
 const router = express.Router();
 
@@ -24,6 +25,7 @@ router
   .post(
     authorize,
     allowTo(userRoles.INSTRUCTOR),
+    upload.single("image"),
     validate(createCourseValidator),
     createCourse,
   );
@@ -34,6 +36,7 @@ router
   .patch(
     authorize,
     allowTo(userRoles.INSTRUCTOR),
+    upload.single("image"),
     validate(courseIdValidator),
     validate(updateCourseValidator),
     updateCourse,
