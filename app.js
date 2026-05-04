@@ -12,6 +12,7 @@ import enrollmentsRoutes from "./routes/enrollmentRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import webhookRoute from "./routes/webhookRoute.js";
+import chatbotRoutes from "./routes/chatbotRoutes.js";
 import { generalLimiter, authLimiter } from "./config/rateLimiter.js";
 import { setupSwagger } from "./config/swagger.js";
 import morgan from "morgan";
@@ -19,29 +20,29 @@ import morgan from "morgan";
 const app = express();
 
 if (process.env.NODE_ENV === "production") {
-  app.set("trust proxy", 1); // Trust first proxy for rate limiting "production only"
+    app.set("trust proxy", 1); // Trust first proxy for rate limiting "production only"
 }
 
 if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
+    app.use(morgan("dev"));
 }
 
 app.use(cors());
 
 app.use(
-  "/api/webhook",
-  express.raw({ type: "application/json" }),
-  webhookRoute,
+    "/api/webhook",
+    express.raw({ type: "application/json" }),
+    webhookRoute,
 );
 
 app.use(express.json());
 
 try {
-  setupSwagger(app);
+    setupSwagger(app);
 } catch (error) {
-  if (process.env.NODE_ENV !== "production") {
-    console.warn("Swagger setup failed:", error.message);
-  }
+    if (process.env.NODE_ENV !== "production") {
+        console.warn("Swagger setup failed:", error.message);
+    }
 }
 
 app.use("/api", generalLimiter);
@@ -59,18 +60,19 @@ app.use("/api/courses/:courseId/reviews", reviewRoutes);
 app.use("/api/reviews", reviewRoutes);
 
 app.use("/api/payments", paymentRoutes);
+app.use("/api/chatbot", chatbotRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
 
 const startServer = async () => {
-  await connectDB();
+    await connectDB();
 
-  app.listen(process.env.PORT, () => {
-    if (process.env.NODE_ENV !== "production") {
-      console.log(`Server is running on port ${process.env.PORT}`);
-    }
-  });
+    app.listen(process.env.PORT, () => {
+        if (process.env.NODE_ENV !== "production") {
+            console.log(`Server is running on port ${process.env.PORT}`);
+        }
+    });
 };
 
 startServer();

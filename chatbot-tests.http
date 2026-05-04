@@ -1,0 +1,33 @@
+@baseUrl = http://localhost:3000
+@token = YOUR_AUTH_TOKEN_HERE
+
+### Chat with Bot (Starting a new conversation)
+POST {{baseUrl}}/api/chatbot/chat
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "message": "Hello, can you tell me about the available courses?"
+}
+
+### Chat with Bot (Continuing a conversation with history)
+POST {{baseUrl}}/api/chatbot/chat
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "message": "What level are they for?",
+    "history": [
+        { "role": "user", "content": "Hello, can you tell me about the available courses?" },
+        { "role": "assistant", "content": "We have various courses in Web Development, Data Science, and Mobile App Development." }
+    ]
+}
+
+### Test Chatbot without message (Error case)
+POST {{baseUrl}}/api/chatbot/chat
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "message": ""
+}
