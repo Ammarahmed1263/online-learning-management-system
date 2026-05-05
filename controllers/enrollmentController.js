@@ -82,12 +82,19 @@ const unEnrollStudent = asyncWrapper(async (req, res, next) => {
 
 const getMyCourses = asyncWrapper(async (req, res, next) => {
   const userId = req.user.id;
-
   const enrollments = await Enrollment.find({ student: userId })
-    .populate("course", "title description price -_id")
+    .populate({
+      path: "course",
+      populate: [
+        { path: "category", select: "name" },
+        { path: "instructor", select: "userName" },
+      ],
+    })
     .lean();
 
-  const courses = enrollments.map((enrollment) => enrollment.course);
+  const courses = enrollments
+    .map((enrollment) => enrollment.course)
+    .filter((course) => course !== null);
 
   res.status(200).json(
     jsend.success({
