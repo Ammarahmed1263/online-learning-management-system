@@ -9,6 +9,20 @@ const createCheckoutSession = asyncWrapper(async (req, res) => {
   const { courseIds } = req.body;
   const user = req.user;
 
+  const existingEnrollments = await Enrollment.find({
+    student: user.id,
+    course: { $in: courseIds },
+  }).populate("course", "title");
+
+  if (existingEnrollments.length > 0) {
+    const ownedTitles = existingEnrollments
+      .map((e) => e.course.title)
+      .join(", ");
+    return res
+      .status(400)
+      .json(jsend.error(`You are already enrolled in: ${ownedTitles}`));
+  }
+
   const courses = await Course.find({ _id: { $in: courseIds } }, "title price");
 
   if (!courses || courses.length === 0) {
@@ -80,7 +94,13 @@ const getCheckoutSession = asyncWrapper(async (req, res) => {
       totalAmount: session.amount_total / 100,
       currency: session.currency,
       items: session.line_items.data.map((item) => item.description),
-      totalDetails: session.total_details,
+      totalDetails: session.total_details
+        ? {
+            amount_discount: session.total_details.amount_discount / 100,
+            amount_shipping: session.total_details.amount_shipping / 100,
+            amount_tax: session.total_details.amount_tax / 100,
+          }
+        : null,
     }),
   );
 });
