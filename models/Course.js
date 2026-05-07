@@ -33,6 +33,16 @@ const courseSchema = new Schema(
       type: String,
       default: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800",
     },
+    averageRating: {
+      type: Number,
+      default: 0,
+      min: [0, "Rating cannot be negative"],
+      max: [5, "Rating cannot exceed 5"],
+    },
+    numReviews: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true },
 );
