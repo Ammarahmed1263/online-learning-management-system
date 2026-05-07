@@ -101,6 +101,7 @@ const getCheckoutSession = asyncWrapper(async (req, res) => {
             amount_tax: session.total_details.amount_tax / 100,
           }
         : null,
+      courseIds: JSON.parse(session.metadata.courseIds || "[]"),
     }),
   );
 });
